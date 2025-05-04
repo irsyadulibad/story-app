@@ -1,0 +1,38 @@
+.auth-section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .card {
+    min-width: 28rem;
+  }
+
+  .title {
+    margin-top: 15px;
+    font-size: 24px;
+    color: black;
+    font-weight: 600;
+  }
+
+  .description {
+    font-size: 14px;
+    color: var(--color-light);
+    margin-top: 5px;
+  }
+
+  form {
+    margin-top: 25px;
+
+    button[type='submit'] {
+      margin-top: 25px;
+    }
+  }
+
+  .auth-link {
+    font-size: 14px;
+    margin-top: 15px;
+    text-align: center;
+    color: var(--color-light);
+  }
+}

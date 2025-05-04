@@ -1,6 +1,7 @@
 :root {
   --color-primary: #18181b;
   --color-light: #525252;
+  --border-light: #e4e4e7;
   --bg-light: #e2e8f0;
   --radius: 0.5rem;
 }
@@ -12,8 +13,21 @@
 }
 
 body {
-  font-family: "Geist", sans-serif;
+  font-family: 'Geist', sans-serif;
   font-optical-sizing: auto;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-primary);
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &.btn:hover {
+    text-decoration: none;
+  }
 }
 
 #content {
@@ -25,13 +39,14 @@ body {
 .btn {
   border: none;
   border-radius: var(--radius);
-  padding: 10px .8rem;
+  padding: 10px 0.8rem;
   font-size: 14px;
   cursor: pointer;
   text-decoration: none;
   display: flex;
   gap: 5px;
   align-items: center;
+  cursor: pointer;
   justify-content: center;
 
   &.primary {
@@ -45,7 +60,54 @@ body {
     border: 1px solid var(--color-light);
   }
 
+  &.full {
+    width: 100%;
+  }
+
   i {
     font-size: 20px;
+  }
+}
+
+.card {
+  border-radius: var(--radius);
+  border: 1px solid var(--border-light);
+  padding: 25px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+
+  label {
+    font-size: 14px;
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+
+  input,
+  select {
+    padding: 10px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-light);
+    font-size: 14px;
+    color: var(--color-primary);
+    background-color: transparent;
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+  }
+}
+
+back-to-home {
+  a {
+    font-size: 14px;
+    text-decoration: none;
+    color: var(--color-light);
   }
 }
