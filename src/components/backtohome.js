@@ -8,8 +8,6 @@ class BackToHome extends HTMLElement {
   }
 
   render() {
-    console.log(this);
-
     this.innerHTML = `
       <a href="#" class="back-to-home">
         <i class="ti ti-arrow-left"></i>

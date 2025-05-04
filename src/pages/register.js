@@ -1,7 +1,11 @@
 import '../css/auth.css';
 import '../components/backtohome';
+import AuthModel from '../models/auth';
+import RegisterPresenter from '../presenters/register';
 
 export default class RegisterPage {
+  #presenter;
+
   async render() {
     return `
     <section class="auth-section">
@@ -13,15 +17,15 @@ export default class RegisterPage {
         <form id="register-form">
           <div class="form-group">
             <label for="name">Nama</label>
-            <input type="text" id="name" autofocus required />
+            <input type="text" id="name" name="name" autofocus required />
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" required />
+            <input type="email" id="email" name="email" required />
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" required />
+            <input type="password" id="password" name="password" required />
           </div>
           <button type="submit" class="btn primary full">Daftar</button>
         </form>
@@ -35,6 +39,27 @@ export default class RegisterPage {
   }
 
   async afterRender() {
-    //
+    this.#presenter = new RegisterPresenter({
+      view: this,
+      model: AuthModel,
+    });
+
+    this._initListener();
+  }
+
+  _initListener() {
+    const form = document.getElementById('register-form');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(event.target);
+
+      this.#presenter.register(
+        formData.get('name'),
+        formData.get('email'),
+        formData.get('password')
+      );
+    });
   }
 }

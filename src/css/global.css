@@ -104,6 +104,56 @@ a {
   }
 }
 
+.navbar {
+  padding: 20px 1rem;
+  border-bottom: 1.5px solid var(--border-light);
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 26rem;
+    margin: auto;
+  }
+
+  .navbar-brand {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .navbar-menu {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+}
+
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 10px;
+  background-color: #101828;
+  color: white;
+  padding: 10px 15px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 500;
+
+  &.danger {
+    background-color: #fb2c36;
+  }
+
+  &.success {
+    background-color: #00a63e;
+  }
+}
+
+section.width-center {
+  max-width: 26rem;
+  margin: auto;
+}
+
 back-to-home {
   a {
     font-size: 14px;
