@@ -1,4 +1,4 @@
-import NavbarPresenter from '../presenters/navbar';
+import NavbarPresenter from '../presenters/navbar-presenter';
 import { getActiveRoute } from '../url-parser';
 
 class Navbar extends HTMLElement {
@@ -28,12 +28,31 @@ class Navbar extends HTMLElement {
         <div class="container">
           <a href="#" class="navbar-brand">StoryShare</a>
           <ul class="navbar-menu">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
+            <li class="nav-item">
+              <a href="#/feed" class="active" aria-label="Feed">
+                <i class="ti ti-home"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#/logout" aria-label="Profile" id="logout-button">
+                <i class="ti ti-logout"></i>
+              </a>
+            </li>
           </ul>
         </div>
       </nav>
     `;
+
+    this.#initListener();
+  }
+
+  #initListener() {
+    const logoutBtn = document.getElementById('logout-button');
+
+    logoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.#presenter.logout();
+    });
   }
 }
 

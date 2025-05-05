@@ -8,8 +8,8 @@ export default class HomePage {
         <p class="description">Bagikan momenmu dengan foto, tuliskan story, dan tandai lokasi</p>
 
         <div class="auth-buttons">
-          <a href="#/login" class="btn primary"><i class="ti ti-login-2"></i> Masuk</a>
-          <a href="#/register" class="btn outline">Daftar</a>
+          <a href="#/login" class="btn primary" aria-label="Masuk"><i class="ti ti-login-2"></i> Masuk</a>
+          <a href="#/register" class="btn outline" aria-label="Daftar"><i class="ti ti-user-plus"></i>Daftar</a>
         </div>
 
         <div class="feature">

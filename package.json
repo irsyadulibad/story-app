@@ -11,5 +11,8 @@
   "devDependencies": {
     "prettier": "^3.5.3",
     "vite": "^6.3.1"
+  },
+  "dependencies": {
+    "moment": "^2.30.1"
   }
 }

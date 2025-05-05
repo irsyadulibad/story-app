@@ -1,7 +1,7 @@
 import '../css/auth.css';
 import '../components/backtohome';
-import AuthModel from '../models/auth';
-import RegisterPresenter from '../presenters/register';
+import AuthModel from '../models/auth-model';
+import RegisterPresenter from '../presenters/register-presenter';
 
 export default class RegisterPage {
   #presenter;
@@ -44,10 +44,10 @@ export default class RegisterPage {
       model: AuthModel,
     });
 
-    this._initListener();
+    this.#initListener();
   }
 
-  _initListener() {
+  #initListener() {
     const form = document.getElementById('register-form');
 
     form.addEventListener('submit', (event) => {

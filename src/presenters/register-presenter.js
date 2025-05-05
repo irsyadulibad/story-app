@@ -7,6 +7,8 @@ export default class RegisterPresenter {
   constructor({ view, model }) {
     this.#view = view;
     this.#model = model;
+
+    this.#checkLoggedIn();
   }
 
   async register(name, email, password) {
@@ -19,5 +21,11 @@ export default class RegisterPresenter {
 
     showToast('Berhasil mendaftar, silahkan login!', 'success');
     window.location.href = '#/login';
+  }
+
+  #checkLoggedIn() {
+    if (this.#model.isLoggedIn()) {
+      window.location.href = '#/feed';
+    }
   }
 }

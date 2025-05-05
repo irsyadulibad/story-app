@@ -1,7 +1,11 @@
 import '../css/auth.css';
 import '../components/backtohome';
+import AuthModel from '../models/auth-model';
+import LoginPresenter from '../presenters/login-presenter';
 
 export default class LoginPage {
+  #presenter;
+
   async render() {
     return `
       <section class="auth-section">
@@ -29,6 +33,22 @@ export default class LoginPage {
   }
 
   async afterRender() {
-    //
+    this.#presenter = new LoginPresenter({
+      view: this,
+      model: AuthModel,
+    });
+
+    this.#initListener();
+  }
+
+  #initListener() {
+    const form = document.getElementById('login-form');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(event.target);
+      this.#presenter.login(formData.get('email'), formData.get('password'));
+    });
   }
 }

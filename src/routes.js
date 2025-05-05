@@ -1,7 +1,7 @@
-import FeedPage from './pages/feed';
-import HomePage from './pages/home';
-import LoginPage from './pages/login';
-import RegisterPage from './pages/register';
+import FeedPage from './pages/feed-page';
+import HomePage from './pages/home-page';
+import LoginPage from './pages/login-page';
+import RegisterPage from './pages/register-page';
 
 const routes = {
   '/': () => new HomePage(),
