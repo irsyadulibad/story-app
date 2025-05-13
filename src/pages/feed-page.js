@@ -12,7 +12,9 @@ export default class FeedPage {
 
     return `
       <section class="width-center" id="feed-section">
-
+        <a class="btn primary" href="#/post" id="btn-add-section">
+          <i class="ti ti-plus"></i>
+        </a>
       </section>
     `;
   }
@@ -41,10 +43,9 @@ export default class FeedPage {
 
             <div>
               <h2 class="author">${story.name}</h2>
-              <p class="location"><i class="ti ti-map-pin"></i><span>lokasi</span></p>
+              <p class="datetime">${fromNow}</p>
             </div>
 
-            <p class="datetime">${fromNow}</p>
           </div>
 
           <img class="post-image" src="${story.photoUrl}" alt="${story.name} story" />

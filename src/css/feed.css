@@ -33,19 +33,7 @@
         color: #09090b;
       }
 
-      .location {
-        margin-top: 2.5px;
-        font-size: 12px;
-        color: var(--color-light);
-
-        i {
-          margin-right: 2.5px;
-        }
-      }
-
       .datetime {
-        position: absolute;
-        right: 0;
         font-size: 12px;
         color: var(--color-light);
       }
@@ -54,12 +42,19 @@
     .post-image {
       width: 100%;
       border-radius: var(--radius);
-      border: .8px solid var(--border-light);
+      border: 0.8px solid var(--border-light);
     }
 
     .post-text {
       margin-top: 5px;
       font-size: 14px;
     }
+  }
+
+  #btn-add-section {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    padding: 15px;
   }
 }

@@ -1,0 +1,151 @@
+#post-section {
+  margin-top: -10px;
+
+  .title {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  .form-group {
+    margin-top: 10px;
+  }
+
+  .upload-container {
+    display: flex;
+    gap: 20px;
+
+    .btn-upload {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      aspect-ratio: 1.5/1;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-light);
+      background-color: white;
+      cursor: pointer;
+      gap: 5px;
+
+      i {
+        font-size: 18px;
+      }
+
+      &:hover {
+        background-color: var(--bg-hover);
+      }
+    }
+  }
+
+  #location-btn,
+  .location-label {
+    display: flex;
+    gap: 10px;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    padding: 10px;
+    font-size: 14px;
+
+    i {
+      font-size: 16px;
+    }
+  }
+
+  .take-photo-container,
+  .photo-preview {
+    position: relative;
+
+    .video-preview,
+    .photo-preview-img {
+      border-radius: var(--radius);
+      width: 100%;
+    }
+
+    .video-preview-close,
+    .photo-preview-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .video-preview-take-photo {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background-color: white;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+        border: 2px solid white;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .select-location {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background-color: white;
+    padding: 1rem;
+    padding-top: 2rem;
+
+    .select-location-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      .title {
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      #close-location-btn {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: var(--radius);
+
+        i {
+          font-size: 16px;
+        }
+
+        &:hover {
+          background-color: var(--bg-hover);
+        }
+      }
+    }
+
+    .select-location-body {
+      .search-box {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .form-control {
+          width: 100%;
+        }
+
+        .btn {
+          width: 45px;
+          height: 38px;
+          padding: 0;
+        }
+      }
+    }
+  }
+}
