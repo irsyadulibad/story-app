@@ -1,11 +1,17 @@
 import '../css/post.css';
-import TakePhoto from '../components/takephoto';
+
+import '../components/takephoto';
+import '../components/pick-location';
+import postModel from '../models/post-model';
+import PostPresenter from '../presenters/post-presenter';
 
 export default class PostPage {
   #photo;
   #presenter;
   #takePhoto;
   #description;
+  #lat;
+  #lon;
 
   get photo() {
     return this.#photo;
@@ -25,6 +31,24 @@ export default class PostPage {
     this.#validateForm();
   }
 
+  get lat() {
+    return this.#lat;
+  }
+
+  set lat(value) {
+    this.#lat = value;
+    this.#validateForm();
+  }
+
+  get lon() {
+    return this.#lon;
+  }
+
+  set lon(value) {
+    this.#lon = value;
+    this.#validateForm();
+  }
+
   async render() {
     return `
       <section class="width-center" id="post-section">
@@ -35,12 +59,12 @@ export default class PostPage {
             <p class="label">Photo</p>
 
             <div class="upload-container">
-              <button class="btn-upload" aria-label="Ambil Foto" id="take-photo-btn">
+              <button type="button" class="btn-upload" aria-label="Ambil Foto" id="take-photo-btn">
                 <i class="ti ti-camera"></i>
                 <span>Ambil Foto</span>
               </button>
 
-              <button class="btn-upload" aria-label="Unggah Gambar" id="upload-btn">
+              <button type="button" class="btn-upload" aria-label="Unggah Gambar" id="upload-btn">
                 <i class="ti ti-upload"></i>
                 <span>Unggah Gambar</span>
               </button>
@@ -48,7 +72,7 @@ export default class PostPage {
               <take-photo></take-photo>
               <div class="photo-preview hidden">
                 <img src="" alt="Photo Preview" class="photo-preview-img">
-                <button class="btn danger small photo-preview-close">
+                <button type="button" class="btn danger small photo-preview-close">
                   <i class="ti ti-x"></i>
                 </button>
               </div>
@@ -61,10 +85,10 @@ export default class PostPage {
           </div>
 
           <div class="form-group">
-            <label for="description">Lokasi</label>
-            <button id="location-btn">
+            <label for="location-btn">Lokasi</label>
+            <button type="button" id="location-btn">
               <i class="ti ti-map-pin"></i>
-              <span>Pilih Lokasi</span>
+              <span id="location-btn-text">Pilih Lokasi</span>
             </button>
           </div>
 
@@ -73,29 +97,21 @@ export default class PostPage {
           </div>
 
           <input type="file" id="photo-input" class="hidden" accept="image/*">
+          <input type="hidden" id="lat" name="lat">
+          <input type="hidden" id="lon" name="lon">
         </form>
 
-        <div class="select-location hidden">
-          <div class="select-location-header">
-            <h2 class="title">Pilih Lokasi</h2>
-            <button id="close-location-btn">
-              <i class="ti ti-x"></i>
-            </button>
-          </div>
-          <div class="select-location-body">
-            <div class="form-group search-box">
-              <input type="text" placeholder="Cari lokasi" class="form-control">
-              <button class="btn primary small">
-                <i class="ti ti-search"></i>
-              </button>
-            </div>
-          </div>
-        </div>
+        <pick-location></pick-location>
       </section>
     `;
   }
 
   async afterRender() {
+    this.#presenter = new PostPresenter({
+      view: this,
+      model: postModel,
+    });
+
     this.#takePhoto = document.querySelector('take-photo');
     this.#addEvent();
   }
@@ -106,6 +122,10 @@ export default class PostPage {
     const closeBtn = document.querySelector('.photo-preview-close');
     const photoInput = document.querySelector('#photo-input');
     const descriptionInput = document.querySelector('#description');
+    const locationBtn = document.querySelector('#location-btn');
+    const pickLocation = document.querySelector('pick-location');
+    const locationBtnText = document.querySelector('#location-btn-text');
+    const postForm = document.querySelector('#post-form');
 
     takePhotoBtn.addEventListener('click', async (e) => {
       e.preventDefault();
@@ -119,9 +139,13 @@ export default class PostPage {
       photoInput.click();
     });
 
-    closeBtn.addEventListener('click', (e) => {
-      e.preventDefault();
+    closeBtn.addEventListener('click', () => {
       this.photo = null;
+    });
+
+    locationBtn.addEventListener('click', (e) => {
+      pickLocation.classList.remove('hidden');
+      pickLocation.render([this.lat, this.lon]);
     });
 
     this.#takePhoto.addEventListener('closeCamera', () => {
@@ -138,6 +162,26 @@ export default class PostPage {
 
     descriptionInput.addEventListener('input', (e) => {
       this.description = e.target.value.trim();
+    });
+
+    pickLocation.addEventListener('pick-location', (e) => {
+      this.lat = e.detail.lat;
+      this.lon = e.detail.lon;
+
+      locationBtnText.textContent = `${this.lat}, ${this.lon}`;
+
+      pickLocation.classList.add('hidden');
+    });
+
+    postForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      this.#presenter.createPost({
+        description: this.description,
+        photo: this.photo,
+        lat: this.lat,
+        lon: this.lon,
+      });
     });
   }
 
@@ -159,7 +203,12 @@ export default class PostPage {
       photoPreviewContainer.classList.add('hidden');
     }
 
-    submitBtn.disabled = !(this.#photo && this.#description);
+    submitBtn.disabled = !(
+      this.#photo &&
+      this.#description &&
+      this.#lat &&
+      this.#lon
+    );
   }
 
   #toggleUploadBtns(isVisible) {

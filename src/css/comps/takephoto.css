@@ -1,0 +1,42 @@
+.take-photo-container,
+.photo-preview {
+  position: relative;
+
+  .video-preview,
+  .photo-preview-img {
+    border-radius: var(--radius);
+    width: 100%;
+  }
+
+  .video-preview-close,
+  .photo-preview-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  .video-preview-take-photo {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      border: 2px solid white;
+      border-radius: 50%;
+    }
+  }
+}

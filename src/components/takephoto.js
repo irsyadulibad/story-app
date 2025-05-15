@@ -1,3 +1,5 @@
+import '../css/comps/takephoto.css';
+
 import { showToast } from '../utils';
 
 class TakePhoto extends HTMLElement {
@@ -22,11 +24,11 @@ class TakePhoto extends HTMLElement {
       <video class="video-preview" autoplay>
       </video>
 
-      <button class="btn danger small video-preview-close" id="close-camera-btn">
+      <button type="button" class="btn danger small video-preview-close" id="close-camera-btn">
         <i class="ti ti-x"></i>
       </button>
 
-      <button class="btn video-preview-take-photo" id="take-photo-btn"></button>
+      <button type="button" class="btn video-preview-take-photo" id="take-photo-btn"></button>
 
       <canvas class="hidden" id="photo-result"></canvas>
     `;
