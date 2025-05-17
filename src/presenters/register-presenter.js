@@ -12,7 +12,11 @@ export default class RegisterPresenter {
   }
 
   async register(name, email, password) {
+    this.#view.showLoading();
+
     const registered = await this.#model.register(name, email, password);
+
+    this.#view.hideLoading();
 
     if (!registered.status) {
       showToast(registered.message, 'danger');

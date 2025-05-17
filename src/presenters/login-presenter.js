@@ -14,6 +14,8 @@ export default class LoginPresenter {
   async login(email, password) {
     const loggedIn = await this.#model.login(email, password);
 
+    this.#view.hideLoading();
+
     if (!loggedIn.status) {
       showToast(loggedIn.message, 'danger');
       return;

@@ -62,4 +62,14 @@ export default class RegisterPage {
       );
     });
   }
+
+  showLoading() {
+    const btn = document.querySelector('button[type="submit"]');
+    btn.classList.add('loading');
+  }
+
+  hideLoading() {
+    const btn = document.querySelector('button[type="submit"]');
+    btn.classList.remove('loading');
+  }
 }

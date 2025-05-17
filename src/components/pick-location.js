@@ -35,16 +35,19 @@ class PickLocation extends HTMLElement {
       <div class="pick-location-body">
         <form method="post" class="form-group search-box" id="geocoding-form">
           <input type="text" name="address" placeholder="Cari lokasi" class="form-control">
-          <button type="submit" class="btn primary small">
+          <button type="submit" class="btn primary small" id="search-btn">
             <i class="ti ti-search"></i>
+            <div class="loading-spinner hidden">
+              <div class="spinner"></div>
+            </div>
           </button>
         </form>
 
-        <div class="map-view" id="map"></div>
-
-        <button class="btn icon primary btn-my-location" id="my-location-btn" title="My Location">
-          <i class="ti ti-current-location"></i>
-        </button>
+        <div class="map-view" id="map">
+          <button class="btn icon primary btn-my-location" id="my-location-btn" title="My Location">
+            <i class="ti ti-current-location"></i>
+          </button>
+        </div>
 
         <div class="result-container hidden">
           <h3 class="result-title">Hasil Pencarian</h3>
@@ -135,6 +138,16 @@ class PickLocation extends HTMLElement {
     geocodeResult.innerHTML = '';
     resultContainer.classList.remove('hidden');
 
+    if (data.length === 0) {
+      geocodeResult.innerHTML = `
+        <div class="empty-state">
+          <i class="ti ti-map-pin-off"></i>
+          <p>Lokasi tidak ditemukan</p>
+        </div>
+      `;
+      return;
+    }
+
     data.forEach((item) => {
       geocodeResult.insertAdjacentHTML(
         'beforeend',
@@ -153,17 +166,49 @@ class PickLocation extends HTMLElement {
     this.#addGeocodeEvent();
   }
 
+  showLoadingGeocode() {
+    const resultContainer = this.querySelector('.result-container');
+    const geocodeResult = this.querySelector('#geocode-result');
+
+    resultContainer.classList.remove('hidden');
+    geocodeResult.innerHTML = `
+      <div class="loading-state">
+        <div class="loading-spinner">
+          <div class="spinner"></div>
+        </div>
+        <p>Mencari lokasi...</p>
+      </div>
+    `;
+  }
+
   #addEvent() {
     const geocodingForm = this.querySelector('#geocoding-form');
     const closeLocationBtn = this.querySelector('#close-location-btn');
     const cancelLocationBtn = this.querySelector('#cancel-location-btn');
     const pickLocationBtn = this.querySelector('#pick-location-btn');
     const myLocationBtn = this.querySelector('#my-location-btn');
+    const searchBtn = this.querySelector('#search-btn');
+    const searchInput = this.querySelector('input[name="address"]');
 
-    geocodingForm.addEventListener('submit', (e) => {
+    geocodingForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const address = e.target.address.value;
-      this.#presenter.searchLocation(address);
+
+      searchBtn.disabled = true;
+      searchInput.disabled = true;
+      searchBtn.querySelector('.ti-search').classList.add('hidden');
+      searchBtn.querySelector('.loading-spinner').classList.remove('hidden');
+
+      this.showLoadingGeocode();
+
+      try {
+        await this.#presenter.searchLocation(address);
+      } finally {
+        searchBtn.disabled = false;
+        searchInput.disabled = false;
+        searchBtn.querySelector('.ti-search').classList.remove('hidden');
+        searchBtn.querySelector('.loading-spinner').classList.add('hidden');
+      }
     });
 
     this.#map.on('click', (e) => {

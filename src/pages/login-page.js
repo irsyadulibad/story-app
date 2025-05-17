@@ -5,6 +5,7 @@ import LoginPresenter from '../presenters/login-presenter';
 
 export default class LoginPage {
   #presenter;
+  #submitButton;
 
   async render() {
     return `
@@ -22,7 +23,7 @@ export default class LoginPage {
               <label for="password">Password</label>
               <input type="password" id="password" name="password" required />
             </div>
-            <button type="submit" class="btn primary full">Masuk</button>
+            <button type="submit" class="btn primary full" id="submit-button">Masuk</button>
           </form>
           <p class="auth-link">
             Belum punya akun? <a href="#/register">Daftar di sini</a>
@@ -38,6 +39,7 @@ export default class LoginPage {
       model: AuthModel,
     });
 
+    this.#submitButton = document.getElementById('submit-button');
     this.#initListener();
   }
 
@@ -46,9 +48,18 @@ export default class LoginPage {
 
     form.addEventListener('submit', (event) => {
       event.preventDefault();
+      this.#submitButton.classList.add('loading');
 
       const formData = new FormData(event.target);
       this.#presenter.login(formData.get('email'), formData.get('password'));
     });
+  }
+
+  showLoading() {
+    this.#submitButton.classList.add('loading');
+  }
+
+  hideLoading() {
+    this.#submitButton.classList.remove('loading');
   }
 }
