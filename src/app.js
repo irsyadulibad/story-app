@@ -19,6 +19,7 @@ export default class App {
     }
 
     document.startViewTransition(async () => {
+      document.documentElement.style.viewTransitionName = routeName;
       this._render(page);
     });
   }
