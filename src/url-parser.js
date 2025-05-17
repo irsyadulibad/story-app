@@ -28,3 +28,8 @@ export function getActiveRoute() {
 
   return constructRouteFromSegements(pathSegments);
 }
+
+export function parseActivePathname() {
+  const pathname = getActivePathname();
+  return extractPathnameSegments(pathname);
+}

@@ -1,3 +1,4 @@
+import FeedDetailPage from './pages/feed-detail-page';
 import FeedPage from './pages/feed-page';
 import HomePage from './pages/home-page';
 import LoginPage from './pages/login-page';
@@ -9,6 +10,7 @@ const routes = {
   '/login': () => new LoginPage(),
   '/register': () => new RegisterPage(),
   '/feed': () => new FeedPage(),
+  '/feed/:id': () => new FeedDetailPage(),
   '/post': () => new PostPage(),
 };
 

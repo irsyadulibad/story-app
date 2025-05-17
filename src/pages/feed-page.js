@@ -12,6 +12,12 @@ export default class FeedPage {
 
     return `
       <section class="width-center" id="feed-section">
+        <div class="feed-loading">
+          <div class="loading-spinner">
+            <div class="spinner"></div>
+          </div>
+          <p>Memuat cerita...</p>
+        </div>
         <a class="btn primary" href="#/post" id="btn-add-section">
           <i class="ti ti-plus"></i>
         </a>
@@ -32,6 +38,11 @@ export default class FeedPage {
     const feedSection = document.getElementById('feed-section');
     const fromNow = moment(story.createdAt).fromNow();
 
+    const loadingState = feedSection.querySelector('.feed-loading');
+    if (loadingState) {
+      loadingState.remove();
+    }
+
     feedSection.insertAdjacentHTML(
       'beforeend',
       `
@@ -48,8 +59,29 @@ export default class FeedPage {
 
           </div>
 
-          <img class="post-image" src="${story.photoUrl}" alt="${story.name} story" />
-          <p class="post-text">${capitalizeFirstLetter(story.description)}</p>
+          <a href="#/feed/${story.id}" class="post-link">
+            <img class="post-image" src="${story.photoUrl}" alt="${story.name} story" />
+            <p class="post-text">${capitalizeFirstLetter(story.description)}</p>
+          </a>
+        </div>
+      `
+    );
+  }
+
+  showEmptyState() {
+    const feedSection = document.getElementById('feed-section');
+    const loadingState = feedSection.querySelector('.feed-loading');
+    if (loadingState) {
+      loadingState.remove();
+    }
+
+    feedSection.insertAdjacentHTML(
+      'beforeend',
+      `
+        <div class="empty-state">
+          <i class="ti ti-news-off"></i>
+          <p>Belum ada cerita</p>
+          <a href="#/post" class="btn primary">Buat Cerita</a>
         </div>
       `
     );
