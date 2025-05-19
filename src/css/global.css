@@ -8,6 +8,21 @@
   --radius: 0.5rem;
 }
 
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background-color: var(--color-primary);
+  color: white;
+  padding: 8px;
+  z-index: 100;
+  transition: top 0.3s ease;
+}
+
+.skip-to-content:focus {
+  top: 0;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -227,6 +242,26 @@ a {
 section.width-center {
   max-width: 26rem;
   margin: auto;
+}
+
+.footer {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  color: var(--color-light);
+  font-size: 14px;
+  border-top: 1px solid var(--border-light);
+  margin-top: 2rem;
+
+  .container {
+    max-width: 26rem;
+    margin: auto;
+  }
+
+  i {
+    color: var(--bg-danger);
+    font-size: 12px;
+    vertical-align: middle;
+  }
 }
 
 back-to-home {
