@@ -10,6 +10,10 @@ class TakePhoto extends HTMLElement {
     super();
     this.classList.add('take-photo-container', 'hidden');
     this.#closeEvent = new Event('closeCamera');
+
+    // Add event listeners for page navigation
+    window.addEventListener('popstate', () => this.closeCamera(false));
+    window.addEventListener('beforeunload', () => this.closeCamera(false));
   }
 
   async previewCamera() {
