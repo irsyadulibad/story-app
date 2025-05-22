@@ -1,5 +1,3 @@
-import { showToast } from '../utils';
-
 class PostPresenter {
   #view;
   #model;
@@ -14,10 +12,9 @@ class PostPresenter {
     const res = await this.#model.createPost({ description, photo, lat, lon });
 
     if (res.status) {
-      showToast('Post berhasil dibagikan', 'success');
-      window.location.href = '#/feed';
+      this.#view.onPostSuccess();
     } else {
-      showToast('Gagal membagikan post', 'danger');
+      this.#view.onPostError();
     }
 
     this.#view.hideLoading();

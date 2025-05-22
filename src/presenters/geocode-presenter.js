@@ -1,5 +1,3 @@
-import { showToast } from '../utils';
-
 export default class GeocodePresenter {
   #view;
   #model;
@@ -13,7 +11,7 @@ export default class GeocodePresenter {
     const data = await this.#model.getGeocode(address);
 
     if (!data) {
-      showToast('Gagal mengambil data geocode', 'danger');
+      this.#view.showGeocodeError('Gagal mengambil data geocode');
       return;
     }
 

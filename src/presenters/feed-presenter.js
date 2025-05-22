@@ -1,5 +1,3 @@
-import { showToast } from '../utils';
-
 export default class FeedPresenter {
   #view;
   #model;
@@ -13,7 +11,7 @@ export default class FeedPresenter {
     const stories = await this.#model.fetchData();
 
     if (!stories.status) {
-      showToast('Gagal menampilkan feed', 'danger');
+      this.#view.showErrorMessage();
       return;
     }
 

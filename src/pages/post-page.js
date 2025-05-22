@@ -4,6 +4,7 @@ import '../components/takephoto';
 import '../components/pick-location';
 import postModel from '../models/post-model';
 import PostPresenter from '../presenters/post-presenter';
+import { showToast } from '../utils';
 
 export default class PostPage {
   #photo;
@@ -224,5 +225,14 @@ export default class PostPage {
   #toggleUploadBtns(isVisible) {
     const uploadBtns = document.querySelectorAll('.btn-upload');
     uploadBtns.forEach((btn) => btn.classList.toggle('hidden', !isVisible));
+  }
+
+  onPostSuccess() {
+    showToast('Post berhasil dibagikan', 'success');
+    window.location.href = '#/feed';
+  }
+
+  onPostError() {
+    showToast('Gagal membagikan post', 'danger');
   }
 }

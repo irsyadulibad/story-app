@@ -1,5 +1,3 @@
-import { showToast } from '../utils';
-
 export default class LoginPresenter {
   #view;
   #model;
@@ -17,17 +15,16 @@ export default class LoginPresenter {
     this.#view.hideLoading();
 
     if (!loggedIn.status) {
-      showToast(loggedIn.message, 'danger');
+      this.#view.showErrorMessage(loggedIn.message);
       return;
     }
 
-    showToast('Berhasil masuk!', 'success');
-    window.location.href = '#/feed';
+    this.#view.onLoginSuccess();
   }
 
   #checkLoggedIn() {
     if (this.#model.isLoggedIn()) {
-      window.location.href = '#/feed';
+      this.#view.onLoginSuccess(false);
     }
   }
 }

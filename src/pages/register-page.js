@@ -2,6 +2,7 @@ import '../css/auth.css';
 import '../components/backtohome';
 import AuthModel from '../models/auth-model';
 import RegisterPresenter from '../presenters/register-presenter';
+import { showToast } from '../utils';
 
 export default class RegisterPage {
   #presenter;
@@ -71,5 +72,17 @@ export default class RegisterPage {
   hideLoading() {
     const btn = document.querySelector('button[type="submit"]');
     btn.classList.remove('loading');
+  }
+
+  onRegisterSuccess(toast = true) {
+    if (toast) {
+      showToast('Berhasil mendaftar, silahkan login!', 'success');
+    }
+
+    window.location.href = '#/login';
+  }
+
+  onRegisterError() {
+    showToast('Gagal mendaftar, silahkan coba lagi!', 'danger');
   }
 }

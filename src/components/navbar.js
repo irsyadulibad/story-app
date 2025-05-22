@@ -1,5 +1,6 @@
 import NavbarPresenter from '../presenters/navbar-presenter';
 import { getActiveRoute } from '../url-parser';
+import { showToast } from '../utils';
 
 class Navbar extends HTMLElement {
   #presenter;
@@ -53,6 +54,11 @@ class Navbar extends HTMLElement {
       e.preventDefault();
       this.#presenter.logout();
     });
+  }
+
+  onLogoutSuccess() {
+    showToast('Berhasil keluar', 'success');
+    window.location.hash = '/login';
   }
 }
 

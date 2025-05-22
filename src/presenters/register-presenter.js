@@ -1,5 +1,3 @@
-import { showToast } from '../utils';
-
 export default class RegisterPresenter {
   #view;
   #model;
@@ -19,17 +17,16 @@ export default class RegisterPresenter {
     this.#view.hideLoading();
 
     if (!registered.status) {
-      showToast(registered.message, 'danger');
+      this.#view.onRegisterError();
       return;
     }
 
-    showToast('Berhasil mendaftar, silahkan login!', 'success');
-    window.location.href = '#/login';
+    this.#view.onRegisterSuccess();
   }
 
   #checkLoggedIn() {
     if (this.#model.isLoggedIn()) {
-      window.location.href = '#/feed';
+      this.#view.onRegisterSuccess(false);
     }
   }
 }

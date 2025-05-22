@@ -1,5 +1,4 @@
 import AuthModel from '../models/auth-model';
-import { showToast } from '../utils';
 
 export default class NavbarPresenter {
   #view;
@@ -12,7 +11,6 @@ export default class NavbarPresenter {
 
   logout() {
     AuthModel.logout();
-    showToast('Berhasil keluar', 'success');
-    window.location.hash = '/login';
+    this.#view.onLogoutSuccess();
   }
 }

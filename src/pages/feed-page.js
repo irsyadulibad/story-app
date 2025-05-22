@@ -1,5 +1,5 @@
 import '../css/feed.css';
-import { capitalizeFirstLetter, checkLoggedIn } from '../utils';
+import { capitalizeFirstLetter, checkLoggedIn, showToast } from '../utils';
 import FeedModel from '../models/feed-model';
 import FeedPresenter from '../presenters/feed-presenter';
 import moment from 'moment';
@@ -85,5 +85,9 @@ export default class FeedPage {
         </div>
       `
     );
+  }
+
+  showErrorMessage() {
+    showToast('Gagal menampilkan feed', 'danger');
   }
 }

@@ -2,6 +2,7 @@ import '../css/auth.css';
 import '../components/backtohome';
 import AuthModel from '../models/auth-model';
 import LoginPresenter from '../presenters/login-presenter';
+import { showToast } from '../utils';
 
 export default class LoginPage {
   #presenter;
@@ -61,5 +62,17 @@ export default class LoginPage {
 
   hideLoading() {
     this.#submitButton.classList.remove('loading');
+  }
+
+  onLoginSuccess(toast = true) {
+    if (toast) {
+      showToast('Berhasil masuk!', 'success');
+    }
+
+    window.location.href = '#/feed';
+  }
+
+  showErrorMessage(message) {
+    showToast(message, 'danger');
   }
 }

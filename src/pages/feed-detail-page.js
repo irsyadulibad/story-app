@@ -110,7 +110,9 @@ export default class FeedDetailPage {
     });
 
     L.control.layers(this.#layers).addTo(this.#map);
-    this.#marker = L.marker([story.lat, story.lon]).addTo(this.#map);
+    this.#marker = L.marker([story.lat, story.lon])
+      .bindPopup(`Latitude: ${story.lat}<br>Longitude: ${story.lon}`)
+      .addTo(this.#map);
   }
 
   showError(message) {

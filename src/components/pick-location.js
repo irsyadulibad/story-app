@@ -254,6 +254,10 @@ class PickLocation extends HTMLElement {
       });
     });
   }
+
+  showGeocodeError(message) {
+    showToast(message, 'danger');
+  }
 }
 
 customElements.define('pick-location', PickLocation);
