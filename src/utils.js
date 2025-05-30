@@ -1,6 +1,7 @@
 import AuthModel from './models/auth-model';
 
-export const apiUrl = 'https://story-api.dicoding.dev/v1';
+export const baseApiUrl = 'https://story-api.dicoding.dev';
+export const apiUrl = `${baseApiUrl}/v1`;
 export const mtApikey = 'KkyMgLJnVkWVvvcTUgxO';
 
 export const reqHeaders = {
