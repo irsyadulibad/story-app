@@ -6,6 +6,36 @@ import { baseApiUrl } from './utils';
 
 precacheAndRoute(self.__WB_MANIFEST || []);
 
+self.addEventListener('push', (event) => {
+  const data = event.data?.json() || {};
+  const body = data?.options?.body ?? 'Story baru telah diposting';
+
+  event.waitUntil(
+    self.registration.showNotification('StoryShare', {
+      body,
+      icon: '/favicon.ico',
+      badge: '/favicon.ico',
+      vibrate: [100, 50, 100],
+      data: {
+        dateOfArrival: Date.now(),
+        primaryKey: 1,
+      },
+      actions: [
+        {
+          action: 'explore',
+          title: 'Lihat Cerita',
+          icon: '/favicon.ico',
+        },
+        {
+          action: 'close',
+          title: 'Tutup',
+          icon: '/favicon.ico',
+        },
+      ],
+    })
+  );
+});
+
 registerRoute(
   ({ request }) => request.mode == 'navigate',
   new StaleWhileRevalidate({

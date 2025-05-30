@@ -77,7 +77,7 @@ export default class FeedPage {
 
     bookmarkButton.classList.add('btn-bookmark');
     bookmarkButton.setAttribute('title', 'Simpan ke bookmark');
-    bookmarkButton.innerHTML = '<i class="ti ti-bookmark"></i>';
+    bookmarkButton.innerHTML = `<i class="ti ti-bookmark${story.isBookmarked ? '-filled' : ''}"></i>`;
 
     bookmarkSpan.appendChild(bookmarkButton);
     bookmarkButton.addEventListener('click', () => {

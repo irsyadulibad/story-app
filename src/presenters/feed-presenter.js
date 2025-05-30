@@ -17,7 +17,9 @@ export default class FeedPresenter {
       return;
     }
 
-    stories.data.forEach((story) => {
+    stories.data.forEach(async (story) => {
+      const isBookmarked = await this.#bookmarkModel.getBookmark(story.id);
+      story.isBookmarked = isBookmarked ? true : false;
       this.#view.renderFeed(story);
     });
   }

@@ -61,6 +61,21 @@ export default defineConfig({
             sizes: '3048x1920',
             form_factor: 'wide',
           },
+          {
+            src: `${baseUrl}screenshots/screenshot4.png`,
+            sizes: '528x1003',
+            form_factor: 'narrow',
+          },
+          {
+            src: `${baseUrl}screenshots/screenshot5.png`,
+            sizes: '528x1003',
+            form_factor: 'narrow',
+          },
+          {
+            src: `${baseUrl}screenshots/screenshot6.png`,
+            sizes: '528x1003',
+            form_factor: 'narrow',
+          },
         ],
         shortcuts: [
           {
