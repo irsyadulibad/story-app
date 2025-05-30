@@ -2,7 +2,7 @@ import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
-import { baseApiUrl } from './utils';
+import { baseApiUrl, baseUrl } from './utils';
 
 precacheAndRoute(self.__WB_MANIFEST || []);
 
@@ -34,6 +34,19 @@ self.addEventListener('push', (event) => {
       ],
     })
   );
+});
+
+self.addEventListener('notificationclick', (event) => {
+  const notification = event.notification;
+  const action = event.action;
+
+  if (action === 'explore') {
+    event.waitUntil(clients.openWindow(`${baseUrl}#/feed`));
+  } else if (action === 'close') {
+    notification.close();
+  }
+
+  notification.close();
 });
 
 registerRoute(

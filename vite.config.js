@@ -1,8 +1,7 @@
 import { defineConfig } from 'vite';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { VitePWA } from 'vite-plugin-pwa';
-
-const baseUrl = '/';
+import { baseUrl } from './src/utils';
 
 export default defineConfig({
   base: baseUrl,
