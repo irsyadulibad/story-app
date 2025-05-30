@@ -1,3 +1,5 @@
+import bookmarkModel from '../models/bookmark-model';
+
 class FeedDetailPresenter {
   #view;
   #model;
@@ -8,6 +10,13 @@ class FeedDetailPresenter {
   }
 
   async getStoryDetail(id) {
+    const bookmark = await bookmarkModel.getBookmark(id);
+
+    if (!navigator.onLine && bookmark) {
+      this.#view.renderStory(bookmark);
+      return;
+    }
+
     try {
       const story = await this.#model.getStoryDetail(id);
       this.#view.renderStory(story);

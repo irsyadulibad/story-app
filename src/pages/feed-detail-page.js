@@ -77,13 +77,15 @@ export default class FeedDetailPage {
     feedDetailSection.innerHTML = `
       <div class="card">
         <div class="post-metadata">
-          <div class="avatar">
-            <span>${story.name.charAt(0).toUpperCase()}</span>
-          </div>
+          <div class="post-metadata-left">
+            <div class="avatar">
+              <span>${story.name.charAt(0).toUpperCase()}</span>
+            </div>
 
-          <div>
-            <h2 class="author">${story.name}</h2>
-            <p class="datetime">${fromNow}</p>
+            <div>
+              <h2 class="author">${story.name} dsadas</h2>
+              <p class="datetime">${fromNow}</p>
+            </div>
           </div>
         </div>
 

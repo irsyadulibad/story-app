@@ -2,7 +2,7 @@ import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
-import { baseApiUrl, apiUrl } from './utils';
+import { baseApiUrl } from './utils';
 
 precacheAndRoute(self.__WB_MANIFEST || []);
 
@@ -50,16 +50,6 @@ registerRoute(
   },
   new StaleWhileRevalidate({
     cacheName: 'story-api-images',
-    plugins: [new CacheableResponsePlugin({ statuses: [0, 200] })],
-  })
-);
-
-registerRoute(
-  ({ url }) => {
-    return url.href.startsWith(`${apiUrl}/stories`);
-  },
-  new StaleWhileRevalidate({
-    cacheName: 'story-api',
     plugins: [new CacheableResponsePlugin({ statuses: [0, 200] })],
   })
 );

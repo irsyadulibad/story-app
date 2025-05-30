@@ -1,3 +1,4 @@
+import BookmarkPage from './pages/bookmark-page';
 import FeedDetailPage from './pages/feed-detail-page';
 import FeedPage from './pages/feed-page';
 import HomePage from './pages/home-page';
@@ -12,6 +13,7 @@ const routes = {
   '/feed': () => new FeedPage(),
   '/feed/:id': () => new FeedDetailPage(),
   '/post': () => new PostPage(),
+  '/bookmarks': () => new BookmarkPage(),
 };
 
 export default routes;

@@ -45,6 +45,30 @@ class BookmarkModel {
       type: 'add',
     };
   }
+
+  async getBookmarks() {
+    const db = await this.#openDb();
+    const tx = db.transaction(DB_STORE, 'readonly');
+    const store = tx.objectStore(DB_STORE);
+
+    return await store.getAll();
+  }
+
+  async deleteBookmark(storyId) {
+    const db = await this.#openDb();
+    const tx = db.transaction(DB_STORE, 'readwrite');
+    const store = tx.objectStore(DB_STORE);
+
+    await store.delete(storyId);
+  }
+
+  async getBookmark(storyId) {
+    const db = await this.#openDb();
+    const tx = db.transaction(DB_STORE, 'readonly');
+    const store = tx.objectStore(DB_STORE);
+
+    return await store.get(storyId);
+  }
 }
 
 export default new BookmarkModel();

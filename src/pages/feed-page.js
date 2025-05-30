@@ -76,6 +76,7 @@ export default class FeedPage {
     const bookmarkSpan = document.querySelector(`.bookmark-span-${story.id}`);
 
     bookmarkButton.classList.add('btn-bookmark');
+    bookmarkButton.setAttribute('title', 'Simpan ke bookmark');
     bookmarkButton.innerHTML = '<i class="ti ti-bookmark"></i>';
 
     bookmarkSpan.appendChild(bookmarkButton);
