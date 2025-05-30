@@ -9,7 +9,6 @@ export default class FeedPage {
 
   async render() {
     checkLoggedIn();
-
     return `
       <section class="width-center" id="feed-section">
         <div class="feed-loading">
@@ -26,6 +25,8 @@ export default class FeedPage {
   }
 
   async afterRender() {
+    // checkLoggedIn();
+
     this.#presenter = new FeedPresenter({
       view: this,
       model: FeedModel,
@@ -88,6 +89,35 @@ export default class FeedPage {
   }
 
   showErrorMessage() {
-    showToast('Gagal menampilkan feed', 'danger');
+    const feedSection = document.getElementById('feed-section');
+    const loadingState = feedSection.querySelector('.feed-loading');
+    const errorState = feedSection.querySelector('.error-state');
+
+    if (loadingState) {
+      loadingState.remove();
+    }
+
+    if (errorState) {
+      errorState.remove();
+    }
+
+    feedSection.insertAdjacentHTML(
+      'beforeend',
+      `
+        <div class="error-state">
+          <i class="ti ti-alert-circle"></i>
+          <p>Gagal menampilkan feed</p>
+          <button class="btn outline" id="btn-refresh-feed">
+            <i class="ti ti-refresh"></i>
+            Coba Lagi
+          </button>
+        </div>
+      `
+    );
+
+    const btnRefreshFeed = document.getElementById('btn-refresh-feed');
+    btnRefreshFeed.addEventListener('click', () => {
+      this.#presenter.getFeed();
+    });
   }
 }

@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
-const baseUrl = process.env.BASE_URL || '/story-app/';
+const baseUrl = '/story-app/';
 
 export default defineConfig({
   base: baseUrl,
@@ -60,6 +60,13 @@ export default defineConfig({
             src: `${baseUrl}screenshots/screenshot3.png`,
             sizes: '3048x1920',
             form_factor: 'wide',
+          },
+        ],
+        shortcuts: [
+          {
+            name: 'Tambah Cerita',
+            short_name: 'Tambah',
+            url: `${baseUrl}#/add`,
           },
         ],
       },
