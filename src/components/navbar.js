@@ -35,6 +35,11 @@ class Navbar extends HTMLElement {
               </a>
             </li>
             <li class="nav-item">
+              <a href="#/bookmarks" aria-label="Postingan Tersimpan">
+                <i class="ti ti-bookmark"></i>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="#/logout" aria-label="Profile" id="logout-button">
                 <i class="ti ti-logout"></i>
               </a>

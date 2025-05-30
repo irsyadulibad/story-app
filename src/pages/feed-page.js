@@ -1,5 +1,6 @@
 import '../css/feed.css';
 import { capitalizeFirstLetter, checkLoggedIn, showToast } from '../utils';
+import BookmarkModel from '../models/bookmark-model';
 import FeedModel from '../models/feed-model';
 import FeedPresenter from '../presenters/feed-presenter';
 import moment from 'moment';
@@ -25,11 +26,10 @@ export default class FeedPage {
   }
 
   async afterRender() {
-    // checkLoggedIn();
-
     this.#presenter = new FeedPresenter({
       view: this,
       model: FeedModel,
+      bookmarkModel: BookmarkModel,
     });
 
     await this.#presenter.getFeed();
@@ -49,15 +49,19 @@ export default class FeedPage {
       `
         <div class="card">
           <div class="post-metadata">
-            <div class="avatar">
-              <span>${story.name.charAt(0).toUpperCase()}</span>
+            <div class="post-metadata-left">
+              <div class="avatar">
+                <span>${story.name.charAt(0).toUpperCase()}</span>
+              </div>
+
+              <div>
+                <h2 class="author">${story.name}</h2>
+                <p class="datetime">${fromNow}</p>
+              </div>
             </div>
 
-            <div>
-              <h2 class="author">${story.name}</h2>
-              <p class="datetime">${fromNow}</p>
-            </div>
-
+            <span class="bookmark-span-${story.id}">
+            </span>
           </div>
 
           <a href="#/feed/${story.id}" class="post-link">
@@ -67,6 +71,25 @@ export default class FeedPage {
         </div>
       `
     );
+
+    const bookmarkButton = document.createElement('button');
+    const bookmarkSpan = document.querySelector(`.bookmark-span-${story.id}`);
+
+    bookmarkButton.classList.add('btn-bookmark');
+    bookmarkButton.innerHTML = '<i class="ti ti-bookmark"></i>';
+
+    bookmarkSpan.appendChild(bookmarkButton);
+    bookmarkButton.addEventListener('click', () => {
+      this.#presenter.toggleBookmark(story);
+    });
+  }
+
+  markAsBookmarked(storyId, type) {
+    const bookmarkButton = document.querySelector(
+      `.bookmark-span-${storyId} > .btn-bookmark`
+    );
+
+    bookmarkButton.innerHTML = `<i class="ti ti-bookmark${type === 'add' ? '-filled' : ''}"></i>`;
   }
 
   showEmptyState() {
@@ -90,8 +113,8 @@ export default class FeedPage {
 
   showErrorMessage() {
     const feedSection = document.getElementById('feed-section');
-    const loadingState = feedSection.querySelector('.feed-loading');
-    const errorState = feedSection.querySelector('.error-state');
+    const loadingState = document.querySelector('.feed-loading');
+    const errorState = document.querySelector('.error-state');
 
     if (loadingState) {
       loadingState.remove();
@@ -119,5 +142,9 @@ export default class FeedPage {
     btnRefreshFeed.addEventListener('click', () => {
       this.#presenter.getFeed();
     });
+  }
+
+  showErrorToast(message) {
+    showToast(message, 'danger');
   }
 }

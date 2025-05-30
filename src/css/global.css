@@ -205,6 +205,7 @@ a {
       align-items: center;
       display: flex;
       border-radius: var(--radius);
+      text-decoration: none;
 
       i {
         font-size: 18px;
@@ -213,6 +214,14 @@ a {
       &.active {
         color: white;
         background-color: var(--color-primary);
+
+        &:hover {
+          background-color: var(--color-primary);
+        }
+      }
+
+      &:hover {
+        background-color: var(--bg-hover);
       }
     }
   }
