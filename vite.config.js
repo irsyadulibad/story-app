@@ -20,7 +20,7 @@ export default defineConfig({
       manifest: {
         name: 'Story Share App',
         short_name: 'StoryShare',
-        description: 'Story Share is a platform for sharing stories.',
+        description: 'Story Share adalah aplikasi untuk berbagi cerita.',
         theme_color: '#ffffff',
         display: 'standalone',
         start_url: '/',
