@@ -1,10 +1,32 @@
 import { defineConfig } from 'vite';
+import { visualizer } from 'rollup-plugin-visualizer';
 import { VitePWA } from 'vite-plugin-pwa';
 
 const baseUrl = '/';
 
 export default defineConfig({
   base: baseUrl,
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('maplibre-gl')) {
+              return 'vendor-maplibre';
+            }
+            if (id.includes('@maptiler')) {
+              return 'vendor-maptiler';
+            }
+            if (id.includes('leaflet')) {
+              return 'vendor-leaflet';
+            }
+
+            return 'vendor';
+          }
+        },
+      },
+    },
+  },
   plugins: [
     VitePWA({
       registerType: 'autoUpdate',
@@ -85,6 +107,10 @@ export default defineConfig({
           },
         ],
       },
+    }),
+    visualizer({
+      emitFile: true,
+      filename: 'stats.html',
     }),
   ],
 });
