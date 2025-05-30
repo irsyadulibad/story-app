@@ -1,7 +1,10 @@
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
+const baseUrl = process.env.BASE_URL || '/story-app/';
+
 export default defineConfig({
+  base: baseUrl,
   plugins: [
     VitePWA({
       registerType: 'autoUpdate',
@@ -23,37 +26,38 @@ export default defineConfig({
         description: 'Story Share adalah aplikasi untuk berbagi cerita.',
         theme_color: '#ffffff',
         display: 'standalone',
-        start_url: '/',
+        start_url: baseUrl,
+        scope: baseUrl,
         icons: [
           {
-            src: 'pwa-144x144.png',
+            src: `${baseUrl}pwa-144x144.png`,
             sizes: '144x144',
             type: 'image/png',
           },
           {
-            src: 'pwa-192x192.png',
+            src: `${baseUrl}pwa-192x192.png`,
             sizes: '192x192',
             type: 'image/png',
           },
           {
-            src: 'pwa-512x512.png',
+            src: `${baseUrl}pwa-512x512.png`,
             sizes: '512x512',
             type: 'image/png',
           },
         ],
         screenshots: [
           {
-            src: 'screenshots/screenshot1.png',
+            src: `${baseUrl}screenshots/screenshot1.png`,
             sizes: '3048x1920',
             form_factor: 'wide',
           },
           {
-            src: 'screenshots/screenshot2.png',
+            src: `${baseUrl}screenshots/screenshot2.png`,
             sizes: '3048x1920',
             form_factor: 'wide',
           },
           {
-            src: 'screenshots/screenshot3.png',
+            src: `${baseUrl}screenshots/screenshot3.png`,
             sizes: '3048x1920',
             form_factor: 'wide',
           },
