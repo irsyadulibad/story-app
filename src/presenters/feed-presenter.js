@@ -10,18 +10,27 @@ export default class FeedPresenter {
   }
 
   async getFeed() {
-    const stories = await this.#model.fetchData();
-
-    if (!stories.status) {
-      this.#view.showErrorMessage();
+    if (!navigator.onLine) {
+      this.#view.showOfflineState();
       return;
     }
 
-    stories.data.forEach(async (story) => {
-      const isBookmarked = await this.#bookmarkModel.getBookmark(story.id);
-      story.isBookmarked = isBookmarked ? true : false;
-      this.#view.renderFeed(story);
-    });
+    try {
+      const stories = await this.#model.fetchData();
+
+      stories.data.forEach(async (story) => {
+        const isBookmarked = await this.#bookmarkModel.getBookmark(story.id);
+        story.isBookmarked = isBookmarked ? true : false;
+        this.#view.renderFeed(story);
+      });
+
+      if (!stories.status) {
+        this.#view.showErrorMessage();
+        return;
+      }
+    } catch {
+      this.#view.showErrorMessage();
+    }
   }
 
   async toggleBookmark(story) {

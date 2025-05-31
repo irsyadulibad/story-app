@@ -40,8 +40,14 @@ export default class FeedPage {
     const fromNow = moment(story.createdAt).fromNow();
 
     const loadingState = feedSection.querySelector('.feed-loading');
+    const errorState = feedSection.querySelector('.error-state');
+
     if (loadingState) {
       loadingState.remove();
+    }
+
+    if (errorState) {
+      errorState.remove();
     }
 
     feedSection.insertAdjacentHTML(
@@ -107,6 +113,25 @@ export default class FeedPage {
           <i class="ti ti-news-off"></i>
           <p>Belum ada cerita</p>
           <a href="#/post" class="btn primary">Buat Cerita</a>
+        </div>
+      `
+    );
+  }
+
+  showOfflineState() {
+    const feedSection = document.getElementById('feed-section');
+    const loadingState = document.querySelector('.feed-loading');
+
+    if (loadingState) {
+      loadingState.remove();
+    }
+
+    feedSection.insertAdjacentHTML(
+      'beforeend',
+      `
+        <div class="offline-state">
+          <i class="ti ti-wifi-off"></i>
+          <p>Anda sedang offline</p>
         </div>
       `
     );

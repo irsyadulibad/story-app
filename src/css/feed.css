@@ -79,7 +79,8 @@
 }
 
 .feed-loading,
-.empty-state {
+.empty-state,
+.offline-state {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,7 +105,8 @@
   }
 }
 
-.empty-state {
+.empty-state,
+.offline-state {
   i {
     font-size: 3rem;
     opacity: 0.5;
