@@ -2,16 +2,16 @@ import 'leaflet/dist/leaflet.css';
 import '../css/comps/pick-location.css';
 
 import L from 'leaflet';
-import { mtApikey, showToast } from '../utils';
+import { baseUrl, mtApikey, showToast } from '../utils';
 import { MaptilerLayer } from '@maptiler/leaflet-maptilersdk';
 import GeocodePresenter from '../presenters/geocode-presenter';
 import mapModel from '../models/map-model';
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: '/images/marker-icon-2x.png',
-  iconUrl: '/images/marker-icon.png',
-  shadowUrl: '/images/marker-shadow.png',
+  iconRetinaUrl: `${baseUrl}/images/marker-icon-2x.png`,
+  iconUrl: `${baseUrl}/images/marker-icon.png`,
+  shadowUrl: `${baseUrl}/images/marker-shadow.png`,
 });
 
 class PickLocation extends HTMLElement {

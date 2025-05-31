@@ -8,7 +8,14 @@ import { parseActivePathname } from '../url-parser';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { MaptilerLayer } from '@maptiler/leaflet-maptilersdk';
-import { mtApikey } from '../utils';
+import { baseUrl, mtApikey } from '../utils';
+
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: `${baseUrl}/images/marker-icon-2x.png`,
+  iconUrl: `${baseUrl}/images/marker-icon.png`,
+  shadowUrl: `${baseUrl}/images/marker-shadow.png`,
+});
 
 export default class FeedDetailPage {
   #presenter;
