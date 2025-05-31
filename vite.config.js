@@ -47,7 +47,7 @@ export default defineConfig({
         description: 'Story Share adalah aplikasi untuk berbagi cerita.',
         theme_color: '#ffffff',
         display: 'standalone',
-        start_url: baseUrl,
+        start_url: `${baseUrl}#/feed`,
         scope: baseUrl,
         icons: [
           {

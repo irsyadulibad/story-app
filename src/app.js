@@ -1,5 +1,6 @@
 import routes from './routes';
 import { getActiveRoute } from './url-parser';
+import NotFoundPage from './pages/notfound-page';
 
 export default class App {
   #content;
@@ -11,7 +12,7 @@ export default class App {
   async renderPage() {
     const routeName = getActiveRoute();
     const route = routes[routeName];
-    const page = route();
+    const page = route ? route() : new NotFoundPage();
 
     if (!document.startViewTransition) {
       this._render(page);

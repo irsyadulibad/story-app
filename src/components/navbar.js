@@ -4,7 +4,7 @@ import { isPushSubscribed, showToast } from '../utils';
 
 class Navbar extends HTMLElement {
   #presenter;
-  _hide = ['/', '/login', '/register'];
+  _hide = ['/', '/login', '/register', '/notfound'];
 
   constructor() {
     super();

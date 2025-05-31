@@ -1,3 +1,5 @@
+import routes from './routes';
+
 function getActivePathname() {
   return location.hash.replace('#', '') || '/';
 }
@@ -25,8 +27,9 @@ function constructRouteFromSegements(pathSegments) {
 export function getActiveRoute() {
   const pathname = getActivePathname();
   const pathSegments = extractPathnameSegments(pathname);
+  const route = constructRouteFromSegements(pathSegments);
 
-  return constructRouteFromSegements(pathSegments);
+  return routes[route] ? route : '/notfound';
 }
 
 export function parseActivePathname() {
