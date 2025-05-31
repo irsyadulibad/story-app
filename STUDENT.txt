@@ -1,1 +1,2 @@
+APP_URL=https://irsyadulibad.github.io/story-app
 MAP_SERVICE_API_KEY=0196c7d2-afc8-7818-96b0-65b29c17df0d
