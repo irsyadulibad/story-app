@@ -142,6 +142,10 @@ export default class FeedPage {
     const loadingState = document.querySelector('.feed-loading');
     const errorState = document.querySelector('.error-state');
 
+    if (!feedSection) {
+      return;
+    }
+
     if (loadingState) {
       loadingState.remove();
     }
