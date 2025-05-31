@@ -40,7 +40,13 @@ export default defineConfig({
         enabled: true,
         type: 'module',
       },
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
+      includeAssets: [
+        'favicon.ico',
+        'apple-touch-icon.png',
+        'images/marker-icon.png',
+        'images/marker-icon-2x.png',
+        'images/marker-shadow.png',
+      ],
       manifest: {
         name: 'Story Share App',
         short_name: 'StoryShare',

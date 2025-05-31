@@ -7,6 +7,13 @@ import { MaptilerLayer } from '@maptiler/leaflet-maptilersdk';
 import GeocodePresenter from '../presenters/geocode-presenter';
 import mapModel from '../models/map-model';
 
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: '/images/marker-icon-2x.png',
+  iconUrl: '/images/marker-icon.png',
+  shadowUrl: '/images/marker-shadow.png',
+});
+
 class PickLocation extends HTMLElement {
   #map;
   #marker;
