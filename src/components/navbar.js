@@ -19,6 +19,11 @@ class Navbar extends HTMLElement {
     this.render();
   }
 
+  #isActiveRoute(route) {
+    const currentRoute = getActiveRoute();
+    return currentRoute === route;
+  }
+
   render() {
     this.innerHTML = '';
 
@@ -30,17 +35,17 @@ class Navbar extends HTMLElement {
           <a href="#" class="navbar-brand">StoryShare</a>
           <ul class="navbar-menu">
             <li class="nav-item">
-              <a href="#/feed" class="active" aria-label="Feed">
+              <a href="#/feed" class="${this.#isActiveRoute('/feed') ? 'active' : ''}" aria-label="Feed">
                 <i class="ti ti-home"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a href="#/bookmarks" aria-label="Postingan Tersimpan">
+              <a href="#/bookmarks" class="${this.#isActiveRoute('/bookmarks') ? 'active' : ''}" aria-label="Postingan Tersimpan">
                 <i class="ti ti-bookmark"></i>
               </a>
             </li>
             <li class="nav-item">
-              <button aria-label="Subscribe Notifikasi" title="Subscribe Notifikasi" id="notification-button">
+              <button aria-label="Aktifkan Notifikasi" title="Aktifkan Notifikasi" id="notification-button">
                 <i class="ti ti-bell"></i>
               </button>
             </li>
@@ -81,6 +86,16 @@ class Navbar extends HTMLElement {
     notificationButton.innerHTML = isSubscribed
       ? '<i class="ti ti-bell-ringing-filled"></i>'
       : '<i class="ti ti-bell"></i>';
+
+    notificationButton.setAttribute(
+      'aria-label',
+      isSubscribed ? 'Nonaktifkan Notifikasi' : 'Aktifkan Notifikasi'
+    );
+
+    notificationButton.setAttribute(
+      'title',
+      isSubscribed ? 'Nonaktifkan Notifikasi' : 'Berlangganan Notifikasi'
+    );
   }
 
   showErrorMessage(message) {
