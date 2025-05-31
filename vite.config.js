@@ -103,6 +103,13 @@ export default defineConfig({
             name: 'Tambah Cerita',
             short_name: 'Tambah',
             url: `${baseUrl}#/add`,
+            icons: [
+              {
+                src: `${baseUrl}add-story.png`,
+                sizes: '512x512',
+                type: 'image/png',
+              },
+            ],
           },
         ],
       },
