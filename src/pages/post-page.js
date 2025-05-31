@@ -4,7 +4,7 @@ import '../components/takephoto';
 import '../components/pick-location';
 import postModel from '../models/post-model';
 import PostPresenter from '../presenters/post-presenter';
-import { showToast } from '../utils';
+import { checkLoggedIn, showToast } from '../utils';
 
 export default class PostPage {
   #photo;
@@ -51,6 +51,7 @@ export default class PostPage {
   }
 
   async render() {
+    checkLoggedIn();
     return `
       <section class="width-center" id="post-section">
         <form class="card" id="post-form">

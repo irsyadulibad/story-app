@@ -3,12 +3,14 @@ import '../css/bookmark.css';
 import BookmarkPresenter from '../presenters/bookmark-presenter';
 import BookmarkModel from '../models/bookmark-model';
 import moment from 'moment';
-import { capitalizeFirstLetter, showToast } from '../utils';
+import { capitalizeFirstLetter, checkLoggedIn, showToast } from '../utils';
 
 export default class BookmarkPage {
   #presenter;
 
   async render() {
+    checkLoggedIn();
+
     return `
       <section class="width-center" id="bookmark-section">
         <div class="bookmark-header">
