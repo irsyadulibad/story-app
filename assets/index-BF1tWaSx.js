@@ -121,7 +121,7 @@ var Qe=Object.defineProperty;var Ae=i=>{throw TypeError(i)};var Ye=(i,e,t)=>e in
           <i class="ti ti-wifi-off"></i>
           <p>Anda sedang offline</p>
         </div>
-      `)}showErrorMessage(){const e=document.getElementById("feed-section"),t=document.querySelector(".feed-loading"),a=document.querySelector(".error-state");t&&t.remove(),a&&a.remove(),e.insertAdjacentHTML("beforeend",`
+      `)}showErrorMessage(){const e=document.getElementById("feed-section"),t=document.querySelector(".feed-loading"),a=document.querySelector(".error-state");if(!e)return;t&&t.remove(),a&&a.remove(),e.insertAdjacentHTML("beforeend",`
         <div class="error-state">
           <i class="ti ti-alert-circle"></i>
           <p>Gagal menampilkan feed</p>
